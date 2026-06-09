@@ -36,8 +36,8 @@ public class GradeSystem {
 
             switch (choice) {
                 case 1: addStudent(); break;
-                case 2: break;
-                case 3:  break;
+                case 2: showAll() break;
+                case 3: searchStudent() break;
                 case 4:  break;
                 case 5: System.out.println("Goodbye!"); break;
                 default: System.out.println("Invalid choice!");
@@ -56,6 +56,22 @@ public class GradeSystem {
         students.add(new Student(id, name, marks));
         System.out.println("Student added!");
     }
+	 private static void showAll() {
+        if (students.isEmpty()) System.out.println("No records.");
+        else for (Student s : students) s.show();
+    }
 
-   
+    private static void searchStudent() {
+        System.out.print("Enter ID: ");
+        String id = sc.nextLine();
+        for (Student s : students) {
+            if (s.getId().equals(id)) {
+                s.show();
+                return;
+            }
+        }
+        System.out.println("Not found.");
+    }
+	
+
 }
