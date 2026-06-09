@@ -1,3 +1,6 @@
+import java.util.ArrayList;
+import java.util.Scanner;
+
 class Student {
     private String id;
     private String name;
@@ -17,6 +20,7 @@ class Student {
         System.out.println("ID: " + id + " | Name: " + name + " | Marks: " + marks);
     }
 }
+
 public class GradeSystem {
     private static ArrayList<Student> students = new ArrayList<>();
     private static Scanner sc = new Scanner(System.in);
@@ -36,9 +40,9 @@ public class GradeSystem {
 
             switch (choice) {
                 case 1: addStudent(); break;
-                case 2: showAll() break;
-                case 3: searchStudent() break;
-                case 4:  break;
+                case 2: showAll(); break;
+                case 3: searchStudent(); break;
+                case 4: averageMarks(); break;
                 case 5: System.out.println("Goodbye!"); break;
                 default: System.out.println("Invalid choice!");
             }
@@ -56,7 +60,8 @@ public class GradeSystem {
         students.add(new Student(id, name, marks));
         System.out.println("Student added!");
     }
-	 private static void showAll() {
+
+    private static void showAll() {
         if (students.isEmpty()) System.out.println("No records.");
         else for (Student s : students) s.show();
     }
@@ -72,6 +77,14 @@ public class GradeSystem {
         }
         System.out.println("Not found.");
     }
-	
 
+    private static void averageMarks() {
+        if (students.isEmpty()) {
+            System.out.println("No records.");
+            return;
+        }
+        double total = 0;
+        for (Student s : students) total += s.getMarks();
+        System.out.println("Average: " + (total / students.size()));
+    }
 }
